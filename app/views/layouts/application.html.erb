@@ -7,8 +7,23 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
+<header>The supercool bitcoin exchange</header>
 <%= yield %>
 
+<section>
+    <% flash.each do |key, value| -%>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end -%>
+</section>
+<section id="auth">
+  <% if signed_in? %>
+  <%= form_tag(sign_out_path, :method => :delete) do -%>
+    <%= submit_tag "Sign out" %>
+  <% end -%>
+<% else %>
+  <%= link_to "Sign in", sign_in_path %>
+<% end %>
+</section>
+<footer>Copyright 2011 BitExchange</footer>
 </body>
 </html>

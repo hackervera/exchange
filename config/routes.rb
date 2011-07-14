@@ -1,4 +1,8 @@
 Exchange::Application.routes.draw do
+  get "home/balance"
+
+  get "main/balance"
+
   get "home/index"
 
   # The priority is based upon order of creation:

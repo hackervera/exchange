@@ -1,0 +1,16 @@
+header {
+    font-family: Helvetica, Arial;
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    font-style: italic;
+
+}
+
+
+#auth {
+    margin-top: 20px;
+}
