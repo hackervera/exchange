@@ -1,1 +1,2 @@
-Bitcoins for the poor yo. Balance:  <%= current_user.balance %>
+Bitcoins for the poor yo. Balance:
+<% if current_user.balance.to_i > 0 %><%= current_user.balance %><%else%> You got no moniezzz!!<% end %>

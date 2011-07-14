@@ -4,7 +4,9 @@ Exchange::Application.routes.draw do
   get "main/balance"
 
   get "home/index"
-
+  get "home/bid"
+  get "home/withdraw"
+  match "/" => redirect("/home/balance")
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

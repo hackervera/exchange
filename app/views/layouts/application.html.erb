@@ -8,6 +8,12 @@
 </head>
 <body>
 <header>The supercool bitcoin exchange</header>
+<% if signed_in? %>
+    <nav>
+      <%= link_to "Make a bid", :controller => :home, :action => :bid %>
+      <%= link_to "Withdraw Money", :controller => :home, :action => :withdraw %>
+    </nav>
+<% end %>
 <%= yield %>
 
 <section>
