@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
-  protect_from_forgery
+  before_filter :authorize
+    #protect_from_forgery
   class JSONRPCException < RuntimeError
     def initialize()
       super()

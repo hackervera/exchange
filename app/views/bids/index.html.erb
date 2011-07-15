@@ -1,0 +1,27 @@
+These are your open bids: <br><br>
+<% current_user.bids.each do |bid| %>
+    <blockquote id=<%= bid.id %>>BTC amount: <%= bid.btc_amount %> <br>
+      Dollar Amount: <%= bid.dollar_amount %>
+      <br>
+      Rate: <%= bid.rate %>
+      <br>
+      Created: <%= bid.created_at %><br>
+      Bid number: <%= bid.id %>
+    <%= link_to "remove", "#", :method => bid.id, :class => :bid %>
+      </blockquote>
+<% end %>
+
+
+<script>
+  $('.bid').click(function(){
+     event.preventDefault();
+      console.log('click')    ;
+      $("#"+$(this).data('method')).fadeOut(500);
+      var id = $(this).data('method');
+      $.ajax({
+        url: "<%= bids_url %>/"+id,
+        type: 'delete',
+        success: function(result) { }
+      });
+  });
+</script>

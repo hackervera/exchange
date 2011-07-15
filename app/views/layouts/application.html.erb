@@ -7,20 +7,8 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<header>The supercool bitcoin exchange</header>
-<% if signed_in? %>
-    <nav>
-      <%= link_to "Make a bid", :controller => :home, :action => :bid %>
-      <%= link_to "Withdraw Money", :controller => :home, :action => :withdraw %>
-    </nav>
-<% end %>
-<%= yield %>
 
-<section>
-    <% flash.each do |key, value| -%>
-      <div class="flash <%= key %>"><%= value %></div>
-    <% end -%>
-</section>
+<header>The supercool bitcoin exchange <% if @title %> <span id="title"> [ <%= @title %> ] </span><% end %></header>
 <section id="auth">
   <% if signed_in? %>
   <%= form_tag(sign_out_path, :method => :delete) do -%>
@@ -30,6 +18,34 @@
   <%= link_to "Sign in", sign_in_path %>
 <% end %>
 </section>
+
+<% if signed_in? %>
+    <nav>
+      <%= link_to "Balance", balance_path %>
+      <%= link_to "Open Orders", bids_path %>
+      <%= link_to "Buy Bitcoin", new_bid_path %>
+      <%= link_to "Sell Bitcoin" %>
+      <%= link_to "Withdraw Money", edit_balance_path(:type => :withdraw) %>
+      <%= link_to "Deposit Money", edit_balance_path(:type => :deposit) %>
+    </nav>
+<% end %>
+<section id="breaker"></section>
+<%= yield %>
+
+<section>
+    <% flash.each do |key, value| -%>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end -%>
+</section>
 <footer>Copyright 2011 BitExchange</footer>
+
+
+<script>
+  $("a").mouseover(function(){
+      $(this).css('text-decoration', 'underline') ;
+  }).mouseout(function(){
+      $(this).css('text-decoration', 'none')
+});
+</script>
 </body>
 </html>

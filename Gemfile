@@ -10,6 +10,7 @@ gem 'thin'
 #gem 'jruby-openssl'
 gem 'rest-client'
 gem 'clearance'
+gem 'jquery-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 

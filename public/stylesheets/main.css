@@ -2,19 +2,40 @@ header {
     font-family: Helvetica, Arial;
     font-size: x-large;
     margin-bottom: 20px;
+    float: left;
 }
 
 footer {
     margin-top: 20px;
     font-style: italic;
+    float: left;
 
 }
 
 nav {
     margin-bottom: 20px;
+    clear:both;
 }
 
 
 #auth {
-    margin-top: 20px;
+    margin-bottom: 20px;
+    float: left;
+    margin-left: 100px;
+}
+
+a {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    color: green;
+}
+
+#title {
+    font-style: italic;
+    font-size: large;
+}
+
+#breaker {
+    clear:both;
 }
