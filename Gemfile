@@ -13,6 +13,7 @@ gem 'clearance'
 gem 'jquery-rails'
 gem 'typhoeus'
 gem 'oauth'
+gem 'andand'
 #gem 'searchlogic'
 gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
 # Use unicorn as the web server

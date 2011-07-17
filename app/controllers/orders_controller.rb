@@ -6,26 +6,14 @@ class OrdersController < ApplicationController
 
   end
   def new
-    mtgox_trades
+
 
   end
   def destroy
 
   end
 
-  def mtgox_trades
-    req = Typhoeus::Request.new("http://mtgox.com/code/data/getDepth.php", max_redirects: 3, follow_location: true)
-    trade_data = nil
-    req.on_complete do |res|
-      trade_data  = JSON.parse(res.body)
 
-    end
-    hydra = Typhoeus::Hydra.new
-    hydra.queue req
-    hydra.run
-
-    @trade_data = trade_data
-  end
 
   def find_match(order)
     type = order.order_type
@@ -47,7 +35,7 @@ class OrdersController < ApplicationController
 
 
         found_order.save
-        if found_order.btc_amount <= 0
+        if found_order.btc_amount <= 0.00001
           found_order.destroy
         end
         current_user.save
@@ -71,7 +59,7 @@ class OrdersController < ApplicationController
         found_order.dollar_amount =found_order.dollar_amount.to_f -    order.dollar_amount.to_f
 
         found_order.save
-        if found_order.btc_amount <= 0
+        if found_order.btc_amount <= 0.00001
           found_order.destroy
         end
         current_user.save
@@ -91,9 +79,13 @@ class OrdersController < ApplicationController
       current_user.btc_balance = current_user.btc_balance.to_f - params[:btc_amount].to_f
     end
     current_user.save
-    order = current_user.orders.create(btc_amount: params[:btc_amount], rate: params[:rate], dollar_amount: params[:dollar_amount], order_type: params[:order_type])
-    find_match(order)
+    @order = current_user.orders.create(params[:order])
+    unless @order.valid?
+      render :action => :new
+    else
+      render :action => :index
+    end
 
-    redirect_to orders_path
   end
+
 end

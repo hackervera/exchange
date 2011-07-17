@@ -40,13 +40,10 @@ EM.next_tick do
     User.all.each do |user|
       next if user.pending.nil? || user.pending.class != Array
       user.pending.delete_if do |pending|
-        delete = nil
-        if h.getreceivedbyaddress.call(pending[0]).to_i >= pending[1]
-           Rails.logger.info  "adding funds to #{user.email} because of #{pending[0]}"
-           user.balance  = user.balance.to_i + pending[1]
-           delete = true
-        end
-        delete == true
+        amount = h.getreceivedbyaddress.call(pending)
+           Rails.logger.info  "adding funds to #{user.email} because of #{pending}"
+           user.balance  = user.balance.to_i + amount
+          amount > 0
       end
       user.save
     end

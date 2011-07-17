@@ -1,38 +1,30 @@
 
-<%= form_tag(orders_path, :method => :post) do -%>
 
-    5 lowest asking prices from MT GOX:
-    <blockquote>
-      <% @trade_data['asks'].sort.first(5).each do |ask|  %>
-          <div class="trade">
-            Rate: <%= ask[0] %><br>
-            Amount: $<%= ask[1]  %><br>
-          </div>
+<% mtgox_trades %>
 
-      <% end  %>
-    </blockquote>
-    <div class="breaker"></div>
-    5 highest bids from MT GOX:
-    <blockquote>
-    <% @trade_data['bids'].sort.reverse.first(5).each do |bid|  %>
-        <div class="trade">
-          Rate: <%= bid[0] %><br>
-          Amount: $<%= bid[1]  %><br>
-        </div>
+Lowest asking price from MT GOX:  [ Rate: <b><%= @ask_gox[0] %></b>, Amount: <b>$<%= @ask_gox[1]  %></b> ] <br>
+<% unless @ask.nil? %>
+    Lowest asking price on site:  [ Rate: <b><%= @ask.rate %></b>  , Amount: <b>$<%= @ask.dollar_amount  %></b> ] <br>
+<% end %>
+Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid_gox[1]  %></b> ]    <br>
+<% unless @bid.nil? %>
+    Highest bid price on site:  [ Rate: <b><%= @bid.rate %></b>, Amount: <b>$<%= @bid.dollar_amount  %></b> ] <br>
+<% end %>
 
-    <% end  %>
-     </blockquote>
-    <div class="breaker"></div>   <br>
-    Rate (dollars per bitcoin): <%= text_field_tag "rate" %><br>
-    BTC Amount: <%= text_field_tag 'btc_amount', nil, :disabled => true %><br>
 
-    Dollar Amount: <%= text_field_tag 'dollar_amount', nil, :disabled => true %>     <br>
+<br>
+<%= form_for(Order.new) do |f| %>
+    <%= error_messages_for :order %>
+    Rate (dollars per bitcoin): <%= f.text_field :rate %><br>
+    BTC Amount: <%= f.text_field :btc_amount  %><br>
 
-    Buy: <%= radio_button_tag "order_type", "bid", true, :class => :radio %>
-    Sell: <%= radio_button_tag "order_type", "ask", false, :class => :radio %>
-    <%= submit_tag "Send" %>
+    Dollar Amount: <%= f.text_field :dollar_amount %>     <br>
 
-<% end -%>
+    Buy: <%= f.radio_button :order_type, :bid,  :class => :radio, :checked => true %> <br>
+    Sell: <%= f.radio_button :order_type, :ask, :class => :radio %>
+    <%= f.submit :process %>
+
+<% end %>
 
 
 
@@ -56,7 +48,7 @@
         }, 1);
 
     });
-    $('#rate').keypress(function(){
+    $('#order_rate').keypress(function(){
         $('#dollar_amount').attr('disabled',false);
         $('#btc_amount').attr('disabled',false)
     })
