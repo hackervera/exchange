@@ -12,7 +12,7 @@
 <section id="auth">
   <% if signed_in? %>
   <%= form_tag(sign_out_path, :method => :delete) do -%>
-    <%= submit_tag "Sign out" %>
+    <%= submit_tag "Sign out: #{current_user.email}" %>
   <% end -%>
 <% else %>
   <%= link_to "Sign in", sign_in_path %>
@@ -22,14 +22,13 @@
 <% if signed_in? %>
     <nav>
       <%= link_to "Balance", balance_path %>
-      <%= link_to "Open Orders", bids_path %>
-      <%= link_to "Buy Bitcoin", new_bid_path %>
-      <%= link_to "Sell Bitcoin" %>
+      <%= link_to "Open Orders", orders_path %>
+      <%= link_to "Buy/Sell Bitcoin", new_order_path %>
       <%= link_to "Withdraw Money", edit_balance_path(:type => :withdraw) %>
       <%= link_to "Deposit Money", edit_balance_path(:type => :deposit) %>
     </nav>
 <% end %>
-<section id="breaker"></section>
+<section class="breaker"></section>
 <%= yield %>
 
 <section>

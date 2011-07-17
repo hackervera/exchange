@@ -1465,7 +1465,7 @@ jQuery.extend({
 		thisCache = cache[ id ];
 
 		// Internal jQuery data is stored in a separate object inside the object's data
-		// cache in order to avoid key collisions between internal data and user-defined
+		// cache in orders to avoid key collisions between internal data and user-defined
 		// data
 		if ( pvt ) {
 			if ( !thisCache[ internalKey ] ) {
@@ -1689,7 +1689,7 @@ function dataAttr( elem, key, data ) {
 
 // TODO: This is a hack for 1.5 ONLY to allow objects with a single toJSON
 // property to be considered empty objects; this property always exists in
-// order to make sure JSON.stringify does not expose internal metadata
+// orders to make sure JSON.stringify does not expose internal metadata
 function isEmptyDataObject( obj ) {
 	for ( var name in obj ) {
 		if ( name !== "toJSON" ) {
@@ -5988,7 +5988,7 @@ jQuery.extend({
 				(elem.nodeType === 1 || elem.nodeType === 11) && !jQuery.isXMLDoc(elem) ) {
 			// IE copies events bound via attachEvent when using cloneNode.
 			// Calling detachEvent on the clone will also remove the events
-			// from the original. In order to get around this, we use some
+			// from the original. In orders to get around this, we use some
 			// proprietary methods to clear the events. Thanks to MooTools
 			// guys for this hotness.
 
@@ -7181,7 +7181,7 @@ jQuery.extend({
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().split( rspacesAjax );
 
-		// Determine if a cross-domain request is in order
+		// Determine if a cross-domain request is in orders
 		if ( s.crossDomain == null ) {
 			parts = rurl.exec( s.url.toLowerCase() );
 			s.crossDomain = !!( parts &&

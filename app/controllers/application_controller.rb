@@ -1,37 +1,26 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
-  before_filter :authorize
+  before_filter :authorize, :load_config
+  def load_config
+    @config = CONFIG
+    auth = "/oauth.ashx"
+    @consumer = OAuth::Consumer.new(@config['dwolla_key'], @config['dwolla_secret'],
+                                    site: "https://www.dwolla.com/oauth",
+                                    callback_url: "http://www.postbin.org/q0q8qw",
+                                    request_token_path: auth,
+                                    authorize_path: auth,
+                                    access_token_path: auth ,
+                                    http_method: :get
+
+    )
+    @request_token = @consumer.get_request_token(scope: "AccountAPI:balance")
+    @access_token = OAuth::AccessToken.new @consumer
+
+
+
+  end
     #protect_from_forgery
-  class JSONRPCException < RuntimeError
-    def initialize()
-      super()
-    end
-  end
 
-  class ServiceProxy
-    def initialize(service_url, service_name=nil)
-      @service_url = service_url
-      @service_name = service_name
-    end
 
-    def method_missing(name, *args, &block)
-      if @service_name != nil
-        name = "%s.%s" % [@service_name, name]
-      end
-      return ServiceProxy.new(@service_url, name)
-    end
 
-    def respond_to?(sym)
-    end
-
-    def call(*args)
-      postdata = {"method" => @service_name, "params" => args, "id" => "jsonrpc"}.to_json
-      respdata = RestClient.post @service_url, postdata
-      resp = JSON.parse respdata
-      if resp["error"] != nil
-        raise JSONRPCException.new, resp['error']
-      end
-      return resp['result']
-    end
-  end
 end

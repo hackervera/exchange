@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  btc_amount: MyString
+  dollar_amount: MyString
+  rate: MyString
+  user_id: 
+
+two:
+  btc_amount: MyString
+  dollar_amount: MyString
+  rate: MyString
+  user_id: 

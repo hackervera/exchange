@@ -1,1 +1,21 @@
 <%= params %>
+<br>
+<% if params[:type] == "deposit" %>
+
+
+    Click button to generate address to send Bitcoin to.<br>
+    Once it arrives, we will credit it to your account.<br>    <br>
+
+    <div id="number"><button id="generate">Generate Number</button></div>
+   <script>
+     $("#generate").click(function(){
+        $.getJSON("/new_id", function(res){
+             $("#number").html(res);
+        })   ;
+     })     ;
+   </script>
+
+
+
+
+<% end %>

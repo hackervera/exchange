@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/railsdog/searchlogic.git
+  revision: 92487f9773b01d27a350c71d0e12fc0124b866b2
+  specs:
+    rd_searchlogic (3.0.1)
+      activerecord (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -50,6 +57,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    oauth (0.4.5)
     polyglot (0.3.1)
     rack (1.2.3)
     rack-mount (0.6.14)
@@ -82,6 +90,9 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
+    typhoeus (0.2.4)
+      mime-types
+      mime-types
     tzinfo (0.3.29)
 
 PLATFORMS
@@ -91,7 +102,10 @@ PLATFORMS
 DEPENDENCIES
   clearance
   jquery-rails
+  oauth
   rails (= 3.0.9)
+  rd_searchlogic!
   rest-client
   sqlite3
   thin
+  typhoeus

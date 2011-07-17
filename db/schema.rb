@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110715001714) do
+ActiveRecord::Schema.define(:version => 20110717064122) do
 
   create_table "bids", :force => true do |t|
     t.string   "btc_amount"
@@ -19,20 +19,21 @@ ActiveRecord::Schema.define(:version => 20110715001714) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "order_id"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "encrypted_password", :limit => 128
-    t.string   "salt",               :limit => 128
-    t.string   "confirmation_token", :limit => 128
-    t.string   "remember_token",     :limit => 128
+  create_table "orders", :force => true do |t|
+    t.string   "btc_amount"
+    t.string   "dollar_amount"
+    t.string   "rate"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "balance"
+    t.string   "type"
+    t.string   "order_type"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email"
-  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'array' for column 'pending'
 
 end

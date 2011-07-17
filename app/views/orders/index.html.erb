@@ -1,0 +1,31 @@
+These are your open orders: <br><br>
+<% current_user.orders.each do |order| %>
+    <blockquote id=<%= order.id %>>BTC amount: <%= order.btc_amount %> <br>
+      Dollar Amount: <%= order.dollar_amount %>
+      <br>
+      Rate: <%= order.rate %>
+      <br>
+      Created: <%= order.created_at %><br>
+      Order number: <%= order.id %><br>
+      Order Type:  <%= order.order_type %><br>
+
+      <%= link_to "remove", "#", :method => order.id, :class => :order %><br>
+
+    </blockquote>
+<% end %>
+
+
+
+<script>
+    $('.order').click(function(){
+        event.preventDefault();
+        console.log('click')    ;
+        $("#"+$(this).data('method')).fadeOut(500);
+        var id = $(this).data('method');
+        $.ajax({
+            url: "<%= orders_path %>/"+id,
+            type: 'delete',
+            success: function(result) { }
+        });
+    });
+</script>

@@ -1,8 +1,0 @@
-Make a new bid:
-
-<%= form_tag(bids_path, :method => :post) do -%>
-   BTC Amount: <%= text_field_tag 'btc_amount'%><br>
-   Rate: <%= text_field_tag 'rate'%>          <br>
-   Dollar Amount: <%= text_field_tag 'dollar_amount'%>     <br>
-    <%= submit_tag "Send" %>
-<% end -%>

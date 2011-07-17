@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+  has_many :orders
   include Clearance::User
-  has_many :bids
+  serialize :pending
 end

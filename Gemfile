@@ -11,6 +11,10 @@ gem 'thin'
 gem 'rest-client'
 gem 'clearance'
 gem 'jquery-rails'
+gem 'typhoeus'
+gem 'oauth'
+#gem 'searchlogic'
+gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
 # Use unicorn as the web server
 # gem 'unicorn'
 

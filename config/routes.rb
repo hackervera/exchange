@@ -1,9 +1,11 @@
 Exchange::Application.routes.draw do
 
   resources :bids
+  resources :orders
   resource :balance
   match "/" => redirect("/balance")
-  # The priority is based upon order of creation:
+  match "/new_id" => "balances#generate_id"
+  # The priority is based upon orders of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
