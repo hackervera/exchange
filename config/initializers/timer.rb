@@ -1,4 +1,4 @@
-CONFIG = YAML::load(File.open("#{RAILS_ROOT}/config/config.yml"))
+CONFIG = JSON.parse(ENV['EXCHANGE'])
 
 class JSONRPCException < RuntimeError
   def initialize()

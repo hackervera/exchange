@@ -32,25 +32,25 @@ Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid
     $('.radio').click(function(){
         //alert($(this).val());
     });
-    $('#btc_amount').keypress(function(){
+    $('#order_btc_amount').keypress(function(){
         var that = this;
         setTimeout(function(){
             console.log($(that).val());
-            $('#dollar_amount').val($(that).val() * $('#rate').val());
+            $('#order_dollar_amount').val($(that).val() * $('#order_rate').val());
         }, 1);
 
     });
-    $('#dollar_amount').keypress(function(){
+    $('#order_dollar_amount').keypress(function(){
         var that = this;
         setTimeout(function(){
             console.log($(that).val());
-            $('#btc_amount').val($(that).val() / $('#rate').val());
+            $('#order_btc_amount').val($(that).val() / $('#order_rate').val());
         }, 1);
 
     });
     $('#order_rate').keypress(function(){
-        $('#dollar_amount').attr('disabled',false);
-        $('#btc_amount').attr('disabled',false)
+        $('#order_dollar_amount').attr('disabled',false);
+        $('#order_btc_amount').attr('disabled',false)
     })
 
 </script>

@@ -83,6 +83,7 @@ class OrdersController < ApplicationController
     unless @order.valid?
       render :action => :new
     else
+      find_match @order
       render :action => :index
     end
 
