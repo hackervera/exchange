@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
   end
   def check_balance
     user = User.find(self.user_id)
-    errors.add(:bitcoin_balance_error, "Insufficient Bitcoin") if self.btc_amount > user.btc_balance
-    errors.add(:dollar_balance_error, "Insufficient Dollars") if self.dollar_amount > user.usd_balance
+    errors.add(:bitcoin_balance_error, "Insufficient Bitcoin") if self.btc_amount.to_f > user.btc_balance.to_f
+    errors.add(:dollar_balance_error, "Insufficient Dollars") if self.dollar_amount.to_f > user.usd_balance.to_f
   end
 end
