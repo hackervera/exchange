@@ -1,10 +1,15 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :btc_amount, :rate,  :dollar_amount
-  validate :check_math
+  validate :check_math, :check_balance
   private
   def check_math
-    errors.add(:math, "Your math is wrong") unless
+    errors.add(:math_error, "Your math is wrong") unless
         self.dollar_amount.to_f / self.rate.to_f == self.btc_amount.to_f
+  end
+  def check_balance
+    user = User.find(self.user_id)
+    errors.add(:bitcoin_balance_error, "Insufficient Bitcoin") if self.btc_amount > user.btc_balance
+    errors.add(:dollar_balance_error, "Insufficient Dollars") if self.dollar_amount > user.usd_balance
   end
 end
