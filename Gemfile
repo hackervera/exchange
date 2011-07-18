@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'typhoeus'
 gem 'oauth'
 gem 'andand'
+gem 'newrelic_rpm', '2.13.1'
 #gem 'searchlogic'
 gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
 # Use unicorn as the web server

@@ -58,6 +58,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    newrelic_rpm (2.13.1)
     oauth (0.4.5)
     polyglot (0.3.1)
     rack (1.2.3)
@@ -104,6 +105,7 @@ DEPENDENCIES
   andand
   clearance
   jquery-rails
+  newrelic_rpm (= 2.13.1)
   oauth
   rails (= 3.0.9)
   rd_searchlogic!
