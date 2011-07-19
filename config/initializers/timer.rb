@@ -1,4 +1,4 @@
-CONFIG = JSON.parse(ENV['EXCHANGE'])
+
 
 class JSONRPCException < RuntimeError
   def initialize()
