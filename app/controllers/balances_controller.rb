@@ -17,9 +17,17 @@ class BalancesController < ApplicationController
       @balance = Balance.new(params[:balance])
       Rails.logger.info "Valid? #{@balance.valid?}; Balance: #{@balance.inspect}"
       params[:id] = "withdraw"
-    unless @balance.valid?
+      Rails.logger.info "Amount: #{@balance.amount}; balance: #{current_user.usd_balance}"
+      if @balance.amount.to_i > current_user.usd_balance.to_i
+        @balance.errors[:amount] << "can't withdraw more money than you have"
+      end
+    unless @balance.errors.empty?
       render :action => :edit
+    else
+      params[:notice] = "We are now sending $#{params[:balance][:amount]} to account ##{params[:balance][:dwolla_account]}"
+      render :action => :index
     end
+
   end
 
   def generate_id

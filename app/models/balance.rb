@@ -4,6 +4,7 @@ class Balance
   extend ActiveModel::Naming
 
   validates_presence_of :dwolla_account, :amount
+  validates_numericality_of :amount, :greater_than => 0
   attr_accessor :dwolla_account, :amount, :current_balance
 
   def initialize(attributes = {})
