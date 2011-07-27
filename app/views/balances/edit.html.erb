@@ -1,21 +1,32 @@
 <%= params %>
 <br>
-<% if params[:type] == "deposit" %>
+<% if params[:id] == "deposit" %>
 
 
     Click button to generate address to send Bitcoin to.<br>
     Once it arrives, we will credit it to your account.<br>    <br>
 
-    <div id="number"><button id="generate">Generate Number</button></div>
-   <script>
-     $("#generate").click(function(){
-        $.getJSON("/new_id", function(res){
-             $("#number").html(res);
-        })   ;
-     })     ;
-   </script>
+    <div id="number">
+      <button id="generate">Generate Number</button>
+    </div>
+    <script>
+        $("#generate").click(function() {
+            $.getJSON("/new_id", function(res) {
+                $("#number").html(res);
+            });
+        });
+    </script>
 
 
 
 
+<% end %>
+
+<% if params[:id] == "withdraw" %>
+    <%= form_for @balance do |f| %>
+        <%= f.error_messages %>
+        Dwolla Account Number:    <%= f.text_field :dwolla_account %><br>
+        USD Amount:    <%= f.text_field :amount %> <br>
+        <%= f.submit :process %>
+    <% end %>
 <% end %>

@@ -21,11 +21,11 @@
 
 <% if signed_in? %>
     <nav>
-      <%= link_to "Balance", balance_path %>
+      <%= link_to "Balance", balances_path %>
       <%= link_to "Open Orders", orders_path %>
       <%= link_to "Buy/Sell Bitcoin", new_order_path %>
-      <%= link_to "Withdraw Money", edit_balance_path(:type => :withdraw) %>
-      <%= link_to "Deposit Money", edit_balance_path(:type => :deposit) %>
+      <%= link_to "Withdraw Money", edit_balance_path("withdraw") %>
+      <%= link_to "Deposit Money", edit_balance_path("deposit") %>
     </nav>
 <% end %>
 <section class="breaker"></section>
