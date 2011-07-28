@@ -1,0 +1,23 @@
+<script src="https://browserid.org/include.js" type="text/javascript"></script>
+You are not currently signed in.  <img src="https://browserid.org/i/sign_in_green.png" id="signin">
+
+
+
+<script>
+    $("#signin").click(function() {
+        navigator.id.getVerifiedEmail(function(assertion) {
+            if (assertion) {
+                // This code will be invoked once the user has successfully
+                // selected an email address they control to sign in with.
+                  $.post("<%= users_path %>", {assertion: assertion, audience: window.location.host}, function(){
+                      window.location.href = "/";
+                  });
+            } else {
+                // something went wrong!  the user isn't logged in.
+                alert('Sign in failed')
+            }
+        });
+    });
+
+</script>
+

@@ -1,5 +1,5 @@
 These are your open orders: <br><br>
-<% current_user.orders.each do |order| %>
+<% @current_user.orders.each do |order| %>
     <blockquote id=<%= order.id %>>BTC amount: <%= order.btc_amount %> <br>
       Dollar Amount: <%= order.dollar_amount %>
       <br>

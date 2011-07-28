@@ -24,8 +24,8 @@ class OrdersController < ApplicationController
         Rails.logger.info found_order.inspect
         other_user = User.find(found_order.user_id)
           #TODO take a percentage fee profit for exchange
-        current_user.btc_balance =  current_user.btc_balance.to_f + order.btc_amount.to_f
-        current_user.usd_balance = current_user.usd_balance.to_f - order.dollar_amount.to_f
+        @current_user.btc_balance =  @current_user.btc_balance.to_f + order.btc_amount.to_f
+        @current_user.usd_balance = @current_user.usd_balance.to_f - order.dollar_amount.to_f
 
         other_user.btc_balance =  other_user.btc_balance.to_f - order.btc_amount.to_f
         other_user.usd_balance = other_user.usd_balance.to_f + order.dollar_amount.to_f
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
         if found_order.btc_amount <= 0.00001
           found_order.destroy
         end
-        current_user.save
+        @current_user.save
         order.destroy
 
       end
@@ -49,8 +49,8 @@ class OrdersController < ApplicationController
         Rails.logger.info found_order.inspect
         other_user = User.find(found_order.user_id)
           #TODO take a percentage fee profit for exchange
-        current_user.btc_balance =  current_user.btc_balance.to_f - order.btc_amount.to_f
-        current_user.usd_balance = current_user.usd_balance.to_f + order.dollar_amount.to_f
+        @current_user.btc_balance =  @current_user.btc_balance.to_f - order.btc_amount.to_f
+        @current_user.usd_balance = @current_user.usd_balance.to_f + order.dollar_amount.to_f
 
         other_user.btc_balance =  other_user.btc_balance.to_f + order.btc_amount.to_f
         other_user.usd_balance = other_user.usd_balance.to_f - order.dollar_amount.to_f
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
         if found_order.btc_amount <= 0.00001
           found_order.destroy
         end
-        current_user.save
+        @current_user.save
         order.destroy
 
       end
@@ -74,12 +74,12 @@ class OrdersController < ApplicationController
 
   def create
     if params[:order_type] == "bid"
-      current_user.usd_balance = current_user.usd_balance.to_f - params[:dollar_amount].to_f
+      @current_user.usd_balance = @current_user.usd_balance.to_f - params[:dollar_amount].to_f
     else
-      current_user.btc_balance = current_user.btc_balance.to_f - params[:btc_amount].to_f
+      @current_user.btc_balance = @current_user.btc_balance.to_f - params[:btc_amount].to_f
     end
-    current_user.save
-    @order = current_user.orders.create(params[:order])
+    @current_user.save
+    @order = @current_user.orders.create(params[:order])
     unless @order.valid?
       render :action => :new
     else
