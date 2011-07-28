@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +11,12 @@
 
 <header>The supercool bitcoin exchange <% if @title %> <span id="title"> [ <%= @title %> ] </span><% end %></header>
 <section id="auth">
-  <% if signed_in? %>
-  <%= form_tag(sign_out_path, :method => :delete) do -%>
-    <%= submit_tag "Sign out: #{current_user.email}" %>
-  <% end -%>
-<% else %>
-  <%= link_to "Sign in", sign_in_path %>
+  <% unless @current_user.nil? %>
+    <%= button_to "Sign out: #{session[:email]}", session_path, :method => :delete %>
 <% end %>
 </section>
 
-<% if signed_in? %>
+<% unless @current_user.nil? %>
     <nav>
       <%= link_to "Balance", balances_path %>
       <%= link_to "Open Orders", orders_path %>
@@ -45,6 +42,9 @@
   }).mouseout(function(){
       $(this).css('text-decoration', 'none')
 });
+        $("#signout").click(function(){
+
+        })
 </script>
 </body>
 </html>

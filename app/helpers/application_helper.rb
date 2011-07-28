@@ -1,6 +1,7 @@
 module ApplicationHelper
   class Dwolla
     attr_accessor :consumer, :access_token, :request_token
+
     def initialize
       @config = CONFIG
 
@@ -16,7 +17,6 @@ module ApplicationHelper
       )
       @request_token = @consumer.get_request_token({}, scope: "AccountAPI:Balance|AccountAPI:AccountInformation")
       @access_token = OAuth::AccessToken.new @consumer
-
 
 
     end
@@ -47,16 +47,19 @@ module ApplicationHelper
 
       end
       @api_key = CONFIG["dwolla_api_key"]
-      @api_code =  CONFIG["dwolla_api_code"]
+      @api_code = CONFIG["dwolla_api_code"]
     end
   end
 
-  def  dwolla
+  def dwolla
     Dwolla.new
   end
 
   def dwolla_soap
     DwollaSoap.new
   end
+
+
+
 
 end

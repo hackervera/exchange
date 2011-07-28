@@ -3,9 +3,12 @@ class BalancesController < ApplicationController
 
 
   end
+  def index
+    Rails.logger.info "Current User: #{@current_user.inspect}"
+  end
 
   def edit
-    @balance = Balance.new({:current_balance => current_user.usd_balance})
+    @balance = Balance.new({:current_balance => @current_user.usd_balance})
   end
 
   def update
@@ -17,8 +20,8 @@ class BalancesController < ApplicationController
       @balance = Balance.new(params[:balance])
       Rails.logger.info "Valid? #{@balance.valid?}; Balance: #{@balance.inspect}"
       params[:id] = "withdraw"
-      Rails.logger.info "Amount: #{@balance.amount}; balance: #{current_user.usd_balance}"
-      if @balance.amount.to_i > current_user.usd_balance.to_i
+      Rails.logger.info "Amount: #{@balance.amount}; balance: #{@current_user.usd_balance}"
+      if @balance.amount.to_i > @current_user.usd_balance.to_i
         @balance.errors[:amount] << "can't withdraw more money than you have"
       end
     unless @balance.errors.empty?
@@ -35,11 +38,11 @@ class BalancesController < ApplicationController
       format.js do
         h = ServiceProxy.new CONFIG["bitcoin_daemon"]
         pending = h.getnewaddress.call
-        unless current_user.pending.class == Array
-          current_user.pending = []
+        unless @current_user.pending.class == Array
+          @current_user.pending = []
         end
-        current_user.pending << pending
-        current_user.save
+        @current_user.pending << pending
+        @current_user.save
         render :json => pending.to_json
       end
     end

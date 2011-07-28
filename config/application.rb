@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 require 'json'
-CONFIG = JSON.parse(ENV['EXCHANGE'])
+CONFIG = JSON.parse('{"foo":"bar"}')
 
 
 # If you have a Gemfile, require the gems listed there, including any gems
@@ -35,7 +35,7 @@ module Exchange
       # config.i18n.default_locale = :de
 
       # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery )
+    config.action_view.javascript_expansions[:defaults] = %w(jquery cookie)
 
       # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

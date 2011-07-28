@@ -3,6 +3,8 @@ Exchange::Application.routes.draw do
   resources :bids
   resources :orders
   resources :balances
+  resources :users
+  resource :session
   match "/" => redirect("/balances")
   match "/new_id" => "balances#generate_id"
   # The priority is based upon orders of creation:
