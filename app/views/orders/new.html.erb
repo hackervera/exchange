@@ -1,9 +1,9 @@
 
-Lowest asking price from MT GOX:  <span id="lowest_ask"></span>
+Lowest asking price from MT GOX:  <span id="lowest_ask"></span>  <br>
 <% unless @ask.nil? %>
     Lowest asking price on site:  [ Rate: <b><%= @ask.rate %></b>  , Amount: <b>$<%= @ask.dollar_amount %></b> ] <br>
 <% end %>
-Highest bid from MT GOX: <span id="highest_bid"></span>
+Highest bid from MT GOX: <span id="highest_bid"></span>  <br>
 <% unless @bid.nil? %>
     Highest bid price on site:  [ Rate: <b><%= @bid.rate %></b>, Amount: <b>$<%= @bid.dollar_amount %></b> ] <br>
 <% end %>
@@ -59,15 +59,17 @@ Highest bid from MT GOX: <span id="highest_bid"></span>
     };
 
     var lowest_ask = function(data) {
-        $("#lowest_ask").html(data.sort(sort_asc)[0]);
+        var lowest =  data.asks.sort(sort_asc)[0]
+        $("#lowest_ask").html(" [ Rate: <b>"+lowest[0]+"</b>, Amount: <b>$"+lowest[1]+"</b> ]");
     };
 
     var highest_bid = function(data) {
-        $("#highest_bid").html(data.sort(sort_dsc)[0]);
+        var highest =   data.bids.sort(sort_dsc)[0]
+        $("#highest_bid").html(" [ Rate: <b>"+highest[0]+"</b>, Amount: <b>$"+highest[1]+"</b> ]");
     };
 
     var set_data = function() {
-        $.getJSON("http://mtgox.com/code/data/getDepth.php", function(response) {
+        $.getJSON("/proxy?url=https://mtgox.com/code/data/getDepth.php", function(response) {
             lowest_ask(response);
             highest_bid(response);
         })
