@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_filter :check_auth, :current_user
+
+  def proxy
+    render :json => Typhoeus::Request.get(params[:url]).body
+  end
+
   private
   def check_auth
     if params[:assertion].nil? && session[:email].nil?
@@ -25,4 +30,6 @@ class ApplicationController < ActionController::Base
       @current_user = User.find_or_create_by_email(:email => session[:email], :usd_balance => 0, :btc_balance => 0)
     end
   end
+
+
 end

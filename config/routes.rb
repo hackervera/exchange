@@ -7,6 +7,7 @@ Exchange::Application.routes.draw do
   resource :session
   match "/" => redirect("/balances")
   match "/new_id" => "balances#generate_id"
+  match "/proxy" => "application#proxy"
   # The priority is based upon orders of creation:
   # first created -> highest priority.
 
