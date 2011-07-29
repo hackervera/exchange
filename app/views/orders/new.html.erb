@@ -1,9 +1,9 @@
 
-Lowest asking price from MT GOX:  <span id="lowest_ask"></span>  <br>
+Lowest asking price from MT GOX:  <span id="lowest_ask">Loading...</span>  <br>
 <% unless @ask.nil? %>
     Lowest asking price on site:  [ Rate: <b><%= @ask.rate %></b>  , Amount: <b>$<%= @ask.dollar_amount %></b> ] <br>
 <% end %>
-Highest bid from MT GOX: <span id="highest_bid"></span>  <br>
+Highest bid from MT GOX: <span id="highest_bid">Loading...</span>  <br>
 <% unless @bid.nil? %>
     Highest bid price on site:  [ Rate: <b><%= @bid.rate %></b>, Amount: <b>$<%= @bid.dollar_amount %></b> ] <br>
 <% end %>
