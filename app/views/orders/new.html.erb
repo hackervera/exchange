@@ -51,6 +51,31 @@ Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid
     $('#order_rate').keypress(function(){
         $('#order_dollar_amount').attr('disabled',false);
         $('#order_btc_amount').attr('disabled',false)
+    });
+
+    var sort_asc = function(a, b) {
+        return  a[0] - b[0];
+
+    };
+    var sort_dsc = function(a, b) {
+        return b[0] - a[0];
+    };
+
+    var lowest_ask = function(data) {
+        $("#lowest_ask").html(data.sort(sort_asc)[0]);
+    };
+
+    var highest_bid = function(data) {
+        $("#highest_bid").html(data.sort(sort_dsc)[0]);
+    };
+
+    var set_data = function() {
+        $.getJSON("http://mtgox.com/code/data/getDepth.php", function(response) {
+            lowest_ask(response);
+            highest_bid(response);
     })
+    };
+
+    set_data();
 
 </script>
