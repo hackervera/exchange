@@ -1,14 +1,11 @@
 
-
-<% mtgox_trades %>
-
-Lowest asking price from MT GOX:  [ Rate: <b><%= @ask_gox[0] %></b>, Amount: <b>$<%= @ask_gox[1]  %></b> ] <br>
+Lowest asking price from MT GOX:  <div id="lowest_ask"></div>
 <% unless @ask.nil? %>
-    Lowest asking price on site:  [ Rate: <b><%= @ask.rate %></b>  , Amount: <b>$<%= @ask.dollar_amount  %></b> ] <br>
+    Lowest asking price on site:  [ Rate: <b><%= @ask.rate %></b>  , Amount: <b>$<%= @ask.dollar_amount %></b> ] <br>
 <% end %>
-Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid_gox[1]  %></b> ]    <br>
+Highest bid from MT GOX: <div id="highest_bid"></div>
 <% unless @bid.nil? %>
-    Highest bid price on site:  [ Rate: <b><%= @bid.rate %></b>, Amount: <b>$<%= @bid.dollar_amount  %></b> ] <br>
+    Highest bid price on site:  [ Rate: <b><%= @bid.rate %></b>, Amount: <b>$<%= @bid.dollar_amount %></b> ] <br>
 <% end %>
 
 
@@ -16,11 +13,11 @@ Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid
 <%= form_for(Order.new) do |f| %>
     <%= error_messages_for :order %>
     Rate (dollars per bitcoin): <%= f.text_field :rate %><br>
-    BTC Amount: <%= f.text_field :btc_amount  %><br>
+    BTC Amount: <%= f.text_field :btc_amount %><br>
 
     Dollar Amount: <%= f.text_field :dollar_amount %>     <br>
 
-    Buy: <%= f.radio_button :order_type, :bid,  :class => :radio, :checked => true %> <br>
+    Buy: <%= f.radio_button :order_type, :bid, :class => :radio, :checked => true %> <br>
     Sell: <%= f.radio_button :order_type, :ask, :class => :radio %>
     <%= f.submit :process %>
 
@@ -29,28 +26,28 @@ Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid
 
 
 <script>
-    $('.radio').click(function(){
+    $('.radio').click(function() {
         //alert($(this).val());
     });
-    $('#order_btc_amount').keypress(function(){
+    $('#order_btc_amount').keypress(function() {
         var that = this;
-        setTimeout(function(){
+        setTimeout(function() {
             console.log($(that).val());
             $('#order_dollar_amount').val($(that).val() * $('#order_rate').val());
         }, 1);
 
     });
-    $('#order_dollar_amount').keypress(function(){
+    $('#order_dollar_amount').keypress(function() {
         var that = this;
-        setTimeout(function(){
+        setTimeout(function() {
             console.log($(that).val());
             $('#order_btc_amount').val($(that).val() / $('#order_rate').val());
         }, 1);
 
     });
-    $('#order_rate').keypress(function(){
-        $('#order_dollar_amount').attr('disabled',false);
-        $('#order_btc_amount').attr('disabled',false)
+    $('#order_rate').keypress(function() {
+        $('#order_dollar_amount').attr('disabled', false);
+        $('#order_btc_amount').attr('disabled', false)
     });
 
     var sort_asc = function(a, b) {
@@ -73,7 +70,7 @@ Highest bid from MT GOX: [ Rate: <b><%= @bid_gox[0] %></b>, Amount: <b>$<%= @bid
         $.getJSON("http://mtgox.com/code/data/getDepth.php", function(response) {
             lowest_ask(response);
             highest_bid(response);
-    })
+        })
     };
 
     set_data();
