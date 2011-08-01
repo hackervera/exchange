@@ -11,4 +11,4 @@ Please fork/commit/push :)
 
 To run, git clone the source, then cd in directory 'bundle install' and 'thin start'
 
-I have code for interacting with dwolla and bitcoin daemon, but they're under construction
+I have code for interacting with dwolla and bitcoin daemon, but they're under construction 
